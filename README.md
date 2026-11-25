@@ -65,7 +65,7 @@ Historia-em-Foco/
 - Murilo Lazzarini Fernandes Lopes 
 - Pedro Gregio Boriero
 
-## Considerações Finais
+# Considerações Finais
 
 O **História em Foco** busca tornar o aprendizado de história mais acessível, interessante e dinâmico. Por meio dos conteúdos apresentados, os estudantes podem conhecer diferentes sociedades, revoluções e conflitos que marcaram a humanidade, compreendendo melhor a construção do mundo atual.
 
