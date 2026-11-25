@@ -1,0 +1,270 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Avaliação | História em Foco</title>
+
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <link rel="stylesheet" href="../assets/css/prova.css">
+
+    <script src="../assets/js/prova.js" defer></script>
+</head>
+
+<body class="exam-page">
+
+    <header class="exam-header">
+
+        <div class="exam-header-content">
+
+            <a href="../index.html" class="logo">
+                <span class="logo-icon">HF</span>
+                <span>História <strong>em Foco</strong></span>
+            </a>
+
+            <div class="exam-header-info">
+                <span class="exam-live-indicator"></span>
+                Avaliação em andamento
+            </div>
+
+            <a href="dashboard.html" class="exam-exit">
+                Sair da avaliação
+            </a>
+
+        </div>
+
+    </header>
+
+    <main class="exam-container">
+
+        <div class="exam-breadcrumb">
+            <a href="dashboard.html">Área do aluno</a>
+            <span>/</span>
+            <a href="cursos.html">Conteúdos</a>
+            <span>/</span>
+            <strong>Avaliação</strong>
+        </div>
+
+        <section class="exam-intro">
+
+            <div>
+                <span class="eyebrow">VERIFIQUE SEU CONHECIMENTO</span>
+
+                <h1>Avaliação de História</h1>
+
+                <p>
+                    Responda às questões e teste seus conhecimentos
+                    sobre os principais acontecimentos históricos.
+                </p>
+            </div>
+
+            <div class="exam-total">
+                <strong>10</strong>
+                <span>QUESTÕES</span>
+            </div>
+
+        </section>
+
+        <section class="exam-progress-card">
+
+            <div class="exam-progress-info">
+                <span>Seu progresso</span>
+                <strong id="progress-label">Questão 1 de 10</strong>
+            </div>
+
+            <div class="exam-progress-track">
+                <div id="exam-progress-bar"></div>
+            </div>
+
+            <div class="exam-progress-bottom">
+                <span id="answered-label">0 de 10 respondidas</span>
+                <span>Escolha apenas uma alternativa por questão.</span>
+            </div>
+
+        </section>
+
+        <div class="exam-layout">
+
+            <section class="exam-main">
+
+                <article class="question-card">
+
+                    <div class="question-card-top">
+
+                        <span class="question-number" id="question-number">
+                            QUESTÃO 01
+                        </span>
+
+                        <span class="question-topic" id="question-topic">
+                            ANTIGUIDADE
+                        </span>
+
+                    </div>
+
+                    <h2 id="question-text">
+                        Carregando questão...
+                    </h2>
+
+                    <p class="question-instruction">
+                        Selecione a alternativa que considera correta.
+                    </p>
+
+                    <div class="answer-options" id="answer-options">
+
+                    </div>
+
+                    <p class="answer-feedback" id="answer-feedback" role="status" aria-live="polite"></p>
+
+                    <div class="question-navigation">
+
+                        <button
+                            type="button"
+                            class="button button-outline"
+                            id="previous-question"
+                            disabled
+                        >
+                            ← Anterior
+                        </button>
+
+                        <button
+                            type="button"
+                            class="button button-primary"
+                            id="next-question"
+                        >
+                            Próxima questão →
+                        </button>
+
+                    </div>
+
+                </article>
+
+                <div class="exam-security-note">
+                    <span>ⓘ</span>
+                    Suas respostas ficam registradas durante esta avaliação.
+                </div>
+
+            </section>
+
+            <aside class="exam-sidebar">
+
+                <div class="question-map-card">
+
+                    <div class="question-map-heading">
+                        <div>
+                            <span class="eyebrow">NAVEGAÇÃO</span>
+                            <h3>Questões</h3>
+                        </div>
+
+                        <span id="map-count">0/10</span>
+                    </div>
+
+                    <div class="question-map" id="question-map">
+
+                    </div>
+
+                    <div class="question-map-legend">
+
+                        <div>
+                            <span class="legend-dot answered"></span>
+                            Respondida
+                        </div>
+
+                        <div>
+                            <span class="legend-dot current"></span>
+                            Atual
+                        </div>
+
+                        <div>
+                            <span class="legend-dot unanswered"></span>
+                            Não respondida
+                        </div>
+
+                    </div>
+
+                    <div class="exam-completion">
+
+                        <div>
+                            <span>Questões respondidas</span>
+                            <strong id="completion-percentage">0%</strong>
+                        </div>
+
+                        <div class="completion-track">
+                            <div id="completion-bar"></div>
+                        </div>
+
+                    </div>
+
+                    <button
+                        type="button"
+                        class="button button-primary finish-button"
+                        id="finish-exam"
+                    >
+                        Finalizar avaliação
+                    </button>
+
+                </div>
+
+                <div class="exam-tip-card">
+
+                    <span class="eyebrow">DICA</span>
+
+                    <h3>Revise antes de finalizar</h3>
+
+                    <p>
+                        Você pode retornar às questões e alterar suas
+                        respostas antes de concluir a avaliação.
+                    </p>
+
+                </div>
+
+            </aside>
+
+        </div>
+
+    </main>
+
+    <!-- CONFIRMAÇÃO DE FINALIZAÇÃO -->
+
+    <div class="exam-modal-overlay" id="finish-modal" hidden>
+
+        <div class="exam-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+
+            <div class="modal-icon">?</div>
+
+            <span class="eyebrow">ENCERRAR AVALIAÇÃO</span>
+
+            <h2 id="modal-title">Deseja finalizar sua prova?</h2>
+
+            <p id="modal-description">
+                Confira suas respostas antes de concluir.
+            </p>
+
+            <div class="modal-actions">
+
+                <button
+                    type="button"
+                    class="button button-outline"
+                    id="cancel-finish"
+                >
+                    Continuar prova
+                </button>
+
+                <button
+                    type="button"
+                    class="button button-primary"
+                    id="confirm-finish"
+                >
+                    Confirmar e finalizar
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

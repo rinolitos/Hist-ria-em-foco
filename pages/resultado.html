@@ -1,0 +1,205 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Resultado | História em Foco</title>
+
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <link rel="stylesheet" href="../assets/css/resultado.css">
+
+    <script src="../assets/js/resultado.js" defer></script>
+</head>
+
+<body class="result-page">
+
+    <header class="result-header">
+
+        <div class="result-header-content">
+
+            <a href="../index.html" class="logo">
+                <span class="logo-icon">HF</span>
+                <span>História <strong>em Foco</strong></span>
+            </a>
+
+            <a href="dashboard.html" class="result-header-link">
+                Área do aluno →
+            </a>
+
+        </div>
+
+    </header>
+
+    <main class="result-container">
+
+        <div class="result-breadcrumb">
+            <a href="dashboard.html">Área do aluno</a>
+            <span>/</span>
+            <a href="prova.html">Avaliação</a>
+            <span>/</span>
+            <strong>Resultado</strong>
+        </div>
+
+        <!-- RESUMO DA NOTA -->
+
+        <section class="result-hero">
+
+            <div class="result-icon">✓</div>
+
+            <span class="eyebrow">AVALIAÇÃO FINALIZADA</span>
+
+            <h1 id="result-title">Seu resultado</h1>
+
+            <p id="result-message">
+                Confira seu desempenho e revise os conteúdos.
+            </p>
+
+            <div class="result-score-area">
+
+                <div class="result-score-circle" id="score-circle">
+
+                    <div>
+                        <strong id="result-score">0,0</strong>
+                        <span>NOTA</span>
+                    </div>
+
+                </div>
+
+                <div class="result-score-description">
+
+                    <strong id="result-percentage">0% de aproveitamento</strong>
+
+                    <span id="result-date">
+                        Avaliação concluída
+                    </span>
+
+                    <span class="result-score-scale">
+                        Escala de 0 a 10
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- ESTATÍSTICAS -->
+
+        <section class="result-stats">
+
+            <article class="result-stat-card">
+
+                <div class="result-stat-icon correct-icon">✓</div>
+
+                <div>
+                    <strong id="result-correct">0</strong>
+                    <span>Respostas corretas</span>
+                </div>
+
+            </article>
+
+            <article class="result-stat-card">
+
+                <div class="result-stat-icon wrong-icon">×</div>
+
+                <div>
+                    <strong id="result-wrong">0</strong>
+                    <span>Respostas incorretas ou em branco</span>
+                </div>
+
+            </article>
+
+            <article class="result-stat-card">
+
+                <div class="result-stat-icon total-icon">▤</div>
+
+                <div>
+                    <strong id="result-total">10</strong>
+                    <span>Total de questões</span>
+                </div>
+
+            </article>
+
+        </section>
+
+        <!-- REVISÃO -->
+
+        <section class="result-review">
+
+            <div class="result-review-heading">
+
+                <div>
+                    <span class="eyebrow">APRENDA COM SEU DESEMPENHO</span>
+
+                    <h2>Revisão das respostas</h2>
+
+                    <p>
+                        Confira as alternativas selecionadas e entenda
+                        as respostas corretas.
+                    </p>
+                </div>
+
+                <span class="review-count" id="review-count">
+                    10 questões
+                </span>
+
+            </div>
+
+            <div class="result-question-list" id="result-question-list"></div>
+
+        </section>
+
+        <!-- AÇÕES -->
+
+        <section class="result-actions">
+
+            <div>
+                <h2>Continue aprendendo</h2>
+
+                <p>
+                    Revise os conteúdos e continue sua jornada pelo conhecimento.
+                </p>
+            </div>
+
+            <div class="result-buttons">
+
+                <a href="cursos.html" class="button button-outline">
+                    Voltar aos conteúdos
+                </a>
+
+                <a href="desempenho.html" class="button button-outline">
+                    Meu desempenho
+                </a>
+
+                <a href="prova.html" class="button button-primary">
+                    Refazer avaliação →
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer class="result-footer">
+
+        <div class="result-footer-content">
+
+            <a href="../index.html" class="logo">
+                <span class="logo-icon">HF</span>
+                <span>História <strong>em Foco</strong></span>
+            </a>
+
+            <span>
+                © <span id="current-year"></span> História em Foco.
+            </span>
+
+        </div>
+
+    </footer>
+
+</body>
+</html>

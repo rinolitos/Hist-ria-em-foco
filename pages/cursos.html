@@ -1,0 +1,678 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Explore os módulos históricos da plataforma História em Foco.">
+
+    <title>Conteúdos | História em Foco</title>
+
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <link rel="stylesheet" href="../assets/css/cursos.css">
+
+    <script src="../assets/js/cursos.js" defer></script>
+</head>
+
+<body class="courses-page">
+
+    <!-- CABEÇALHO -->
+
+    <header class="courses-header">
+
+        <div class="courses-header-content">
+
+            <a href="../index.html" class="logo">
+                <span class="logo-icon">HF</span>
+                <span>História <strong>em Foco</strong></span>
+            </a>
+
+            <nav class="courses-navigation">
+
+                <a href="../index.html">Início</a>
+
+                <a href="dashboard.html">
+                    Área do aluno
+                </a>
+
+                <span class="course-user">
+                    <span class="course-user-avatar">E</span>
+                    Estudante
+                </span>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+    <main>
+
+        <!-- INTRODUÇÃO -->
+
+        <section class="courses-hero">
+
+            <div class="courses-container">
+
+                <div class="courses-breadcrumb">
+                    <a href="dashboard.html">Área do aluno</a>
+                    <span>/</span>
+                    <strong>Conteúdos</strong>
+                </div>
+
+                <div class="courses-hero-content">
+
+                    <div>
+
+                        <span class="eyebrow">
+                            BIBLIOTECA HISTÓRICA
+                        </span>
+
+                        <h1>
+                            Explore os capítulos
+                            <span>da História.</span>
+                        </h1>
+
+                        <p>
+                            Dos primeiros grandes impérios às disputas
+                            do século XX. Descubra os acontecimentos,
+                            personagens e transformações que moldaram
+                            o mundo em que vivemos.
+                        </p>
+
+                    </div>
+
+                    <div class="courses-hero-decoration">
+                        <span>H</span>
+                        <small>EST. · CONHECIMENTO</small>
+                    </div>
+
+                </div>
+
+                <div class="courses-summary">
+
+                    <div>
+                        <strong>08</strong>
+                        <span>Módulos históricos</span>
+                    </div>
+
+                    <div>
+                        <strong>04</strong>
+                        <span>Períodos históricos</span>
+                    </div>
+
+                    <div>
+                        <strong>01</strong>
+                        <span>Jornada de aprendizado</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- CATÁLOGO -->
+
+        <section class="courses-catalog">
+
+            <div class="courses-container">
+
+                <div class="catalog-heading">
+
+                    <div>
+                        <span class="eyebrow">NOSSA BIBLIOTECA</span>
+
+                        <h2>Todos os conteúdos</h2>
+
+                        <p>
+                            Escolha um período e comece a explorar.
+                        </p>
+                    </div>
+
+                    <div class="catalog-counter">
+                        <strong id="visible-count">08</strong>
+                        <span>conteúdos encontrados</span>
+                    </div>
+
+                </div>
+
+                <!-- PESQUISA -->
+
+                <div class="catalog-search-area">
+
+                    <div class="catalog-search">
+
+                        <span class="search-icon">⌕</span>
+
+                        <input
+                            type="search"
+                            id="course-search"
+                            placeholder="Pesquisar por um conteúdo histórico..."
+                            aria-label="Pesquisar conteúdos históricos"
+                        >
+
+                        <span class="search-shortcut">BUSCAR</span>
+
+                    </div>
+
+                </div>
+
+                <!-- FILTROS -->
+
+                <div class="catalog-filters">
+
+                    <span>Filtrar por período:</span>
+
+                    <div class="filter-buttons">
+
+                        <button class="filter-button active" data-filter="todos" aria-pressed="true">
+                            Todos
+                        </button>
+
+                        <button class="filter-button" data-filter="antiguidade" aria-pressed="false">
+                            Antiguidade
+                        </button>
+
+                        <button class="filter-button" data-filter="medieval" aria-pressed="false">
+                            Idade Média
+                        </button>
+
+                        <button class="filter-button" data-filter="moderna" aria-pressed="false">
+                            Idade Moderna
+                        </button>
+
+                        <button class="filter-button" data-filter="contemporanea" aria-pressed="false">
+                            Idade Contemporânea
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <!-- CARDS DOS MÓDULOS -->
+
+                <div class="courses-grid" id="courses-grid">
+
+                    <!-- MÓDULO 1 -->
+
+                    <article class="course-card" data-category="antiguidade">
+
+                        <div class="course-cover cover-greece">
+
+                            <span class="cover-era">ANTIGUIDADE</span>
+
+                            <span class="cover-symbol">Α</span>
+
+                            <span class="cover-number">01 / 08</span>
+
+                            <span class="cover-caption">
+                                CIVILIZAÇÕES CLÁSSICAS
+                            </span>
+
+                        </div>
+
+                        <div class="course-card-content">
+
+                            <div class="course-card-meta">
+                                <span>MÓDULO 01</span>
+                                <span class="course-period">Antiguidade</span>
+                            </div>
+
+                            <h3>Grécia e Roma Antiga</h3>
+
+                            <p>
+                                Explore as civilizações que influenciaram
+                                a política, a filosofia, as leis e a cultura
+                                do mundo ocidental.
+                            </p>
+
+                            <div class="course-card-bottom">
+
+                                <span class="course-card-type">
+                                    Aulas e atividades
+                                </span>
+
+                                <button
+                                    class="course-access"
+                                    type="button"
+                                    data-module-access="Grécia e Roma Antiga"
+                                >
+                                    Acessar módulo →
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+                    <!-- MÓDULO 2 -->
+
+                    <article class="course-card" data-category="medieval">
+
+                        <div class="course-cover cover-crusades">
+
+                            <span class="cover-era">IDADE MÉDIA</span>
+
+                            <span class="cover-symbol">✥</span>
+
+                            <span class="cover-number">02 / 08</span>
+
+                            <span class="cover-caption">
+                                RELIGIÃO E CONFLITOS
+                            </span>
+
+                        </div>
+
+                        <div class="course-card-content">
+
+                            <div class="course-card-meta">
+                                <span>MÓDULO 02</span>
+                                <span class="course-period">Idade Média</span>
+                            </div>
+
+                            <h3>As Cruzadas</h3>
+
+                            <p>
+                                Compreenda os conflitos religiosos,
+                                políticos e econômicos entre cristãos
+                                e muçulmanos durante a Idade Média.
+                            </p>
+
+                            <div class="course-card-bottom">
+
+                                <span class="course-card-type">
+                                    Aulas e atividades
+                                </span>
+
+                                <button
+                                    class="course-access"
+                                    type="button"
+                                    data-module-access="As Cruzadas"
+                                >
+                                    Acessar módulo →
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+                    <!-- MÓDULO 3 -->
+
+                    <article class="course-card" data-category="moderna">
+
+                        <div class="course-cover cover-renaissance">
+
+                            <span class="cover-era">IDADE MODERNA</span>
+
+                            <span class="cover-symbol">✧</span>
+
+                            <span class="cover-number">03 / 08</span>
+
+                            <span class="cover-caption">
+                                ARTE E CONHECIMENTO
+                            </span>
+
+                        </div>
+
+                        <div class="course-card-content">
+
+                            <div class="course-card-meta">
+                                <span>MÓDULO 03</span>
+                                <span class="course-period">Idade Moderna</span>
+                            </div>
+
+                            <h3>Renascimento</h3>
+
+                            <p>
+                                Descubra o movimento que transformou
+                                a arte, a ciência, a cultura e o
+                                pensamento europeu.
+                            </p>
+
+                            <div class="course-card-bottom">
+
+                                <span class="course-card-type">
+                                    Aulas e atividades
+                                </span>
+
+                                <button
+                                    class="course-access"
+                                    type="button"
+                                    data-module-access="Renascimento"
+                                >
+                                    Acessar módulo →
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+                    <!-- MÓDULO 4 -->
+
+                    <article class="course-card" data-category="moderna">
+
+                        <div class="course-cover cover-france">
+
+                            <span class="cover-era">IDADE MODERNA</span>
+
+                            <span class="cover-symbol">⚜</span>
+
+                            <span class="cover-number">04 / 08</span>
+
+                            <span class="cover-caption">
+                                LIBERDADE E IGUALDADE
+                            </span>
+
+                        </div>
+
+                        <div class="course-card-content">
+
+                            <div class="course-card-meta">
+                                <span>MÓDULO 04</span>
+                                <span class="course-period">Idade Moderna</span>
+                            </div>
+
+                            <h3>Revolução Francesa</h3>
+
+                            <p>
+                                Entenda o processo revolucionário,
+                                a queda da monarquia e as mudanças
+                                políticas e sociais na França.
+                            </p>
+
+                            <div class="course-card-bottom">
+
+                                <span class="course-card-type">
+                                    Aulas e atividades
+                                </span>
+
+                                <button
+                                    class="course-access"
+                                    type="button"
+                                    data-module-access="Revolução Francesa"
+                                >
+                                    Acessar módulo →
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+                    <!-- MÓDULO 5 -->
+
+                    <article class="course-card" data-category="contemporanea">
+
+                        <div class="course-cover cover-haiti">
+
+                            <span class="cover-era">IDADE CONTEMPORÂNEA</span>
+
+                            <span class="cover-symbol">★</span>
+
+                            <span class="cover-number">05 / 08</span>
+
+                            <span class="cover-caption">
+                                LUTA E INDEPENDÊNCIA
+                            </span>
+
+                        </div>
+
+                        <div class="course-card-content">
+
+                            <div class="course-card-meta">
+                                <span>MÓDULO 05</span>
+                                <span class="course-period">Contemporânea</span>
+                            </div>
+
+                            <h3>Revolução Haitiana</h3>
+
+                            <p>
+                                Conheça a revolução liderada por
+                                pessoas escravizadas que levou à
+                                independência do Haiti.
+                            </p>
+
+                            <div class="course-card-bottom">
+
+                                <span class="course-card-type">
+                                    Aulas e atividades
+                                </span>
+
+                                <button
+                                    class="course-access"
+                                    type="button"
+                                    data-module-access="Revolução Haitiana"
+                                >
+                                    Acessar módulo →
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+                    <!-- MÓDULO 6 -->
+
+                    <article class="course-card" data-category="contemporanea">
+
+                        <div class="course-cover cover-ww1">
+
+                            <span class="cover-era">SÉCULO XX</span>
+
+                            <span class="cover-symbol">1914</span>
+
+                            <span class="cover-number">06 / 08</span>
+
+                            <span class="cover-caption">
+                                PRIMEIRA GUERRA MUNDIAL
+                            </span>
+
+                        </div>
+
+                        <div class="course-card-content">
+
+                            <div class="course-card-meta">
+                                <span>MÓDULO 06</span>
+                                <span class="course-period">Contemporânea</span>
+                            </div>
+
+                            <h3>Primeira Guerra Mundial</h3>
+
+                            <p>
+                                Estude as causas, as alianças,
+                                o desenvolvimento e as consequências
+                                do conflito iniciado em 1914.
+                            </p>
+
+                            <div class="course-card-bottom">
+
+                                <span class="course-card-type">
+                                    Aulas e atividades
+                                </span>
+
+                                <button
+                                    class="course-access"
+                                    type="button"
+                                    data-module-access="Primeira Guerra Mundial"
+                                >
+                                    Acessar módulo →
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+                    <!-- MÓDULO 7 -->
+
+                    <article class="course-card" data-category="contemporanea">
+
+                        <div class="course-cover cover-ww2">
+
+                            <span class="cover-era">SÉCULO XX</span>
+
+                            <span class="cover-symbol">1939</span>
+
+                            <span class="cover-number">07 / 08</span>
+
+                            <span class="cover-caption">
+                                SEGUNDA GUERRA MUNDIAL
+                            </span>
+
+                        </div>
+
+                        <div class="course-card-content">
+
+                            <div class="course-card-meta">
+                                <span>MÓDULO 07</span>
+                                <span class="course-period">Contemporânea</span>
+                            </div>
+
+                            <h3>Segunda Guerra Mundial</h3>
+
+                            <p>
+                                Analise as causas, os acontecimentos,
+                                o Holocausto e as consequências do
+                                maior conflito militar do século XX.
+                            </p>
+
+                            <div class="course-card-bottom">
+
+                                <span class="course-card-type">
+                                    Aulas e atividades
+                                </span>
+
+                                <button
+                                    class="course-access"
+                                    type="button"
+                                    data-module-access="Segunda Guerra Mundial"
+                                >
+                                    Acessar módulo →
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+                    <!-- MÓDULO 8 -->
+
+                    <article class="course-card" data-category="contemporanea">
+
+                        <div class="course-cover cover-coldwar">
+
+                            <span class="cover-era">SÉCULO XX</span>
+
+                            <span class="cover-symbol">1947</span>
+
+                            <span class="cover-number">08 / 08</span>
+
+                            <span class="cover-caption">
+                                A DISPUTA ENTRE POTÊNCIAS
+                            </span>
+
+                        </div>
+
+                        <div class="course-card-content">
+
+                            <div class="course-card-meta">
+                                <span>MÓDULO 08</span>
+                                <span class="course-period">Contemporânea</span>
+                            </div>
+
+                            <h3>Guerra Fria</h3>
+
+                            <p>
+                                Compreenda a disputa política,
+                                econômica, ideológica e militar
+                                entre Estados Unidos e União Soviética.
+                            </p>
+
+                            <div class="course-card-bottom">
+
+                                <span class="course-card-type">
+                                    Aulas e atividades
+                                </span>
+
+                                <button
+                                    class="course-access"
+                                    type="button"
+                                    data-module-access="Guerra Fria"
+                                >
+                                    Acessar módulo →
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+                </div>
+
+                <!-- RESULTADO VAZIO -->
+
+                <div class="courses-empty" id="courses-empty" hidden>
+
+                    <span>⌕</span>
+
+                    <h3>Nenhum conteúdo encontrado</h3>
+
+                    <p>
+                        Não encontramos módulos com os termos pesquisados.
+                        Tente outra pesquisa ou altere o filtro.
+                    </p>
+
+                    <button type="button" id="clear-filters">
+                        Limpar pesquisa e filtros
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- RODAPÉ -->
+
+    <footer class="courses-footer">
+
+        <div class="courses-container courses-footer-content">
+
+            <a href="../index.html" class="logo">
+                <span class="logo-icon">HF</span>
+                <span>História <strong>em Foco</strong></span>
+            </a>
+
+            <p>
+                Conhecimento que atravessa séculos.
+            </p>
+
+            <span>
+                © <span id="current-year"></span> História em Foco.
+            </span>
+
+        </div>
+
+    </footer>
+
+    <!-- NOTIFICAÇÃO -->
+
+    <div class="courses-toast" id="courses-toast" role="status" aria-live="polite"></div>
+
+</body>
+</html>

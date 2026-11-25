@@ -1,0 +1,115 @@
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700&display=swap');
+
+:root {
+    --blue-dark: #14263D;
+    --gold: #D5A441;
+    --paper: #F5F2EA;
+    --white: #FFFFFF;
+    --petroleum: #426B78;
+    --text: #293746;
+    --text-light: #6B7782;
+    --border: #E5E1D8;
+
+    --font-main: 'DM Sans', Arial, sans-serif;
+    --font-heading: 'Playfair Display', Georgia, serif;
+
+    --container-width: 1180px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--paper);
+    color: var(--text);
+    font-family: var(--font-main);
+    line-height: 1.6;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button {
+    font-family: inherit;
+    cursor: pointer;
+}
+
+.container {
+    width: min(90%, var(--container-width));
+    margin: 0 auto;
+}
+
+.section-padding {
+    padding: 90px 0;
+}
+
+.eyebrow {
+    display: inline-block;
+    color: var(--petroleum);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    margin-bottom: 16px;
+}
+
+h1, h2, h3 {
+    color: var(--blue-dark);
+}
+
+h1, h2 {
+    font-family: var(--font-heading);
+    line-height: 1.2;
+}
+
+.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 13px 22px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 700;
+    transition: 0.25s ease;
+}
+
+.button-primary {
+    background-color: var(--gold);
+    color: var(--blue-dark);
+}
+
+.button-primary:hover {
+    background-color: #E3B95F;
+    transform: translateY(-2px);
+}
+
+.button-outline {
+    border: 1px solid var(--border);
+    color: var(--blue-dark);
+}
+
+.button-outline:hover {
+    border-color: var(--gold);
+    background-color: rgba(213, 164, 65, 0.08);
+}
+
+.text-link {
+    color: var(--petroleum);
+    font-size: 14px;
+    font-weight: 700;
+    transition: 0.2s;
+}
+
+.text-link:hover {
+    color: var(--blue-dark);
+}
