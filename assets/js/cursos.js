@@ -33,9 +33,9 @@ const moduleSlugs = {
 
 function filterCourses() {
 
-    const searchTerm = searchInput.value
-        .trim()
-        .toLocaleLowerCase("pt-BR");
+    const searchTerm = searchInput
+        ? searchInput.value.trim().toLocaleLowerCase("pt-BR")
+        : "";
 
     let visibleCourses = 0;
 
@@ -63,9 +63,13 @@ function filterCourses() {
 
     });
 
-    visibleCount.textContent = String(visibleCourses).padStart(2, "0");
+    if (visibleCount) {
+        visibleCount.textContent = String(visibleCourses).padStart(2, "0");
+    }
 
-    emptyMessage.hidden = visibleCourses !== 0;
+    if (emptyMessage) {
+        emptyMessage.hidden = visibleCourses !== 0;
+    }
 
 }
 
@@ -73,9 +77,7 @@ function filterCourses() {
 // PESQUISA EM TEMPO REAL
 
 if (searchInput) {
-
     searchInput.addEventListener("input", filterCourses);
-
 }
 
 
@@ -110,7 +112,9 @@ if (clearFiltersButton) {
 
     clearFiltersButton.addEventListener("click", () => {
 
-        searchInput.value = "";
+        if (searchInput) {
+            searchInput.value = "";
+        }
 
         activeFilter = "todos";
 
@@ -174,7 +178,7 @@ moduleButtons.forEach(button => {
         }
 
         window.location.href =
-            `aula.html?modulo=${encodeURIComponent(moduleSlug)}`;
+            `aula.php?modulo=${encodeURIComponent(moduleSlug)}`;
 
     });
 

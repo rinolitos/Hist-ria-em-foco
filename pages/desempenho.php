@@ -1,4 +1,7 @@
-
+<?php
+require_once __DIR__ . "/../assets/config/protecao.php";
+exigirLogin();
+?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -31,14 +34,17 @@
 
             <nav class="performance-navigation">
 
-                <a href="dashboard.html">Área do aluno</a>
+                <a href="dashboard.php">Área do aluno</a>
 
-                <a href="cursos.html">Conteúdos</a>
+                <a href="cursos.php">Conteúdos</a>
 
-                <div class="performance-user">
-                    <span class="performance-avatar">E</span>
-                    Estudante
-                </div>
+               <div class="performance-user">
+                 <span class="performance-avatar">
+                <?= strtoupper(substr($_SESSION["usuario_nome"] ?? "E", 0, 1)) ?>
+                </span>
+
+                <?= htmlspecialchars($_SESSION["usuario_nome"] ?? "Estudante", ENT_QUOTES, "UTF-8") ?>
+            </div>
 
             </nav>
 
@@ -52,7 +58,7 @@
 
         <div class="performance-breadcrumb">
 
-            <a href="dashboard.html">Área do aluno</a>
+            <a href="dashboard.php">Área do aluno</a>
 
             <span>/</span>
 
@@ -77,7 +83,7 @@
 
             </div>
 
-            <a href="prova.html" class="button button-primary">
+            <a href="prova.php" class="button button-primary">
                 Nova avaliação →
             </a>
 
@@ -159,7 +165,7 @@
                 e visualizar seus resultados aqui.
             </p>
 
-            <a href="prova.html" class="button button-primary">
+            <a href="prova.php" class="button button-primary">
                 Realizar primeira avaliação →
             </a>
 
@@ -337,11 +343,11 @@
 
             <div class="performance-footer-buttons">
 
-                <a href="cursos.html" class="button button-outline">
+                <a href="cursos.php" class="button button-outline">
                     Estudar conteúdos
                 </a>
 
-                <a href="prova.html" class="button button-primary">
+                <a href="prova.php" class="button button-primary">
                     Nova avaliação →
                 </a>
 

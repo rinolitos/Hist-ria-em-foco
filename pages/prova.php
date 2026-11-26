@@ -1,4 +1,7 @@
-
+<?php
+require_once __DIR__ . "/../assets/config/protecao.php";
+exigirLogin();
+?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -30,7 +33,7 @@
                 Avaliação em andamento
             </div>
 
-            <a href="dashboard.html" class="exam-exit">
+            <a href="dashboard.php" class="exam-exit">
                 Sair da avaliação
             </a>
 
@@ -41,9 +44,9 @@
     <main class="exam-container">
 
         <div class="exam-breadcrumb">
-            <a href="dashboard.html">Área do aluno</a>
+            <a href="dashboard.php">Área do aluno</a>
             <span>/</span>
-            <a href="cursos.html">Conteúdos</a>
+            <a href="cursos.php">Conteúdos</a>
             <span>/</span>
             <strong>Avaliação</strong>
         </div>

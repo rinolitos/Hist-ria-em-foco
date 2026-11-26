@@ -1,4 +1,85 @@
+<?php
 
+require_once __DIR__ . "/../assets/config/sessao.php";
+
+$mensagem = "";
+$tipoMensagem = "";
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+
+    $email = trim($_POST["email"] ?? "");
+    $senha = $_POST["senha"] ?? "";
+
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+
+        $mensagem = "Digite um e-mail válido.";
+        $tipoMensagem = "erro";
+
+    } elseif (empty($senha)) {
+
+        $mensagem = "Digite sua senha.";
+        $tipoMensagem = "erro";
+
+    } else {
+
+        try {
+
+            require_once __DIR__ . "/../assets/config/conexao.php";
+
+            $sql = "SELECT id, nome, email, senha, tipo
+                    FROM usuarios
+                    WHERE email = :email
+                    LIMIT 1";
+
+            $consulta = $pdo->prepare($sql);
+
+            $consulta->execute([
+                ":email" => $email
+            ]);
+
+            $usuario = $consulta->fetch();
+
+            if ($usuario && password_verify($senha, $usuario["senha"])) {
+
+                if (!in_array($usuario["tipo"], ["aluno", "admin"], true)) {
+                    $mensagem = "Tipo de usuário inválido.";
+                    $tipoMensagem = "erro";
+                } else {
+
+                    session_regenerate_id(true);
+
+                    $_SESSION["usuario_id"] = $usuario["id"];
+                    $_SESSION["usuario_nome"] = $usuario["nome"];
+                    $_SESSION["usuario_email"] = $usuario["email"];
+                    $_SESSION["usuario_tipo"] = $usuario["tipo"];
+
+                    if ($usuario["tipo"] === "admin") {
+                        header("Location: admin.php");
+                    } else {
+                        header("Location: dashboard.php");
+                    }
+
+                    exit;
+                }
+
+            } else {
+
+                $mensagem = "E-mail ou senha incorretos.";
+                $tipoMensagem = "erro";
+
+            }
+
+        } catch (PDOException $e) {
+
+            $mensagem = "Não foi possível realizar o login. Verifique a conexão com o banco de dados.";
+            $tipoMensagem = "erro";
+
+        }
+
+    }
+}
+
+?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -11,7 +92,7 @@
     <link rel="stylesheet" href="../assets/css/global.css">
     <link rel="stylesheet" href="../assets/css/pages.css">
 
-    <script src="../assets/js/auth.js" defer></script>
+    
 </head>
 
 <body class="auth-page">
@@ -96,7 +177,7 @@
 
                 </div>
 
-                <form id="login-form" data-auth-form="login">
+                <form id="login-form" method="POST" action="login.php">
 
                     <div class="form-group">
 
@@ -155,7 +236,11 @@
                         Entrar na plataforma →
                     </button>
 
-                    <p class="form-feedback" role="status" aria-live="polite"></p>
+                   <p class="form-feedback" role="status" aria-live="polite"
+                    style="display: <?= $mensagem !== "" ? "block" : "none" ?>;
+                    color: <?= $tipoMensagem === "erro" ? "#dc2626" : "#16a34a" ?>;">
+                    <?= htmlspecialchars($mensagem, ENT_QUOTES, 'UTF-8') ?>
+                    </p>
 
                 </form>
 
@@ -169,7 +254,7 @@
                         Ainda não possui uma conta?
                     </p>
 
-                    <a href="cadastro.html">
+                    <a href="cadastro.php">
                         Criar minha conta
                     </a>
 

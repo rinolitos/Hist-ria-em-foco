@@ -1,4 +1,7 @@
-
+<?php
+require_once __DIR__ . "/../assets/config/protecao.php";
+exigirLogin();
+?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -25,7 +28,7 @@
                 <span>História <strong>em Foco</strong></span>
             </a>
 
-            <a href="dashboard.html" class="result-header-link">
+            <a href="dashboard.php" class="result-header-link">
                 Área do aluno →
             </a>
 
@@ -36,9 +39,9 @@
     <main class="result-container">
 
         <div class="result-breadcrumb">
-            <a href="dashboard.html">Área do aluno</a>
+            <a href="dashboard.php">Área do aluno</a>
             <span>/</span>
-            <a href="prova.html">Avaliação</a>
+            <a href="prova.php">Avaliação</a>
             <span>/</span>
             <strong>Resultado</strong>
         </div>
@@ -166,15 +169,15 @@
 
             <div class="result-buttons">
 
-                <a href="cursos.html" class="button button-outline">
+                <a href="cursos.php" class="button button-outline">
                     Voltar aos conteúdos
                 </a>
 
-                <a href="desempenho.html" class="button button-outline">
+                <a href="desempenho.php" class="button button-outline">
                     Meu desempenho
                 </a>
 
-                <a href="prova.html" class="button button-primary">
+                <a href="prova.php" class="button button-primary">
                     Refazer avaliação →
                 </a>
 

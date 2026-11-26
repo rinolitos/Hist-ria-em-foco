@@ -865,7 +865,7 @@ function completeExam() {
             JSON.stringify(result)
         );
 
-        window.location.href = "resultado.html";
+        window.location.href = "resultado.php";
 
     } catch (error) {
 

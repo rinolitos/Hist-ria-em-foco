@@ -1,4 +1,7 @@
-
+<?php
+require_once __DIR__ . "/../assets/config/protecao.php";
+exigirLogin();
+?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -35,23 +38,23 @@
 
             <nav class="sidebar-navigation">
 
-                <a href="dashboard.html" class="sidebar-link active">
+                <a href="dashboard.php" class="sidebar-link active">
                     <span class="sidebar-icon">⌂</span>
                     <span>Visão geral</span>
                 </a>
 
-                <a href="cursos.html" class="sidebar-link">
+                <a href="cursos.php" class="sidebar-link">
                     <span class="sidebar-icon">▤</span>
                     <span>Meus conteúdos</span>
                 </a>
 
-                <a href="prova.html" class="sidebar-link" data-coming-soon>
+                <a href="prova.php" class="sidebar-link" data-coming-soon>
                     <span class="sidebar-icon">✓</span>
                     <span>Avaliações</span>
                     <span class="menu-badge">Em breve</span>
                 </a>
 
-                <a href="desempenho.html" class="sidebar-link" data-coming-soon>
+                <a href="desempenho.php" class="sidebar-link" data-coming-soon>
                     <span class="sidebar-icon">▥</span>
                     <span>Meu desempenho</span>
                     <span class="menu-badge">Em breve</span>
@@ -67,18 +70,18 @@
 
                 <div class="sidebar-user">
 
-                    <div class="user-avatar">
-                        E
+                  <div class="user-avatar">
+                    <?= strtoupper(substr($_SESSION["usuario_nome"] ?? "E", 0, 1)) ?>
                     </div>
 
                     <div class="sidebar-user-info">
-                        <strong>Estudante</strong>
+                        <span><?= htmlspecialchars($_SESSION["usuario_nome"] ?? "Estudante", ENT_QUOTES, "UTF-8") ?></span>
                         <span>Aluno</span>
                     </div>
 
                 </div>
 
-                <a href="login.html" class="sidebar-link logout-link">
+                <a href="logout.php" class="sidebar-link logout-link">
                     <span class="sidebar-icon">↪</span>
                     <span>Sair da conta</span>
                 </a>
@@ -116,16 +119,14 @@
 
                 </div>
 
-                <div class="topbar-right">
-
-                    <div class="topbar-welcome">
-                        <span>Bem-vindo(a),</span>
-                        <strong>Estudante</strong>
-                    </div>
+              <div class="topbar-welcome">
+                <span>Bem-vindo(a),</span>
+                <strong><?= htmlspecialchars($_SESSION["usuario_nome"] ?? "Estudante", ENT_QUOTES, "UTF-8") ?></strong>
+               </div>
 
                     <div class="topbar-avatar">
-                        E
-                    </div>
+                    <?= strtoupper(substr($_SESSION["usuario_nome"] ?? "E", 0, 1)) ?>
+                </div>
 
                 </div>
 
@@ -140,14 +141,14 @@
                     <div>
                         <span class="eyebrow">SUA JORNADA DE APRENDIZADO</span>
 
-                        <h1>Olá, estudante!</h1>
+                        <h1>Olá, <?= htmlspecialchars($_SESSION["usuario_nome"] ?? "estudante", ENT_QUOTES, "UTF-8") ?>!</h1>
 
                         <p id="welcome-date">
                             Continue sua jornada pelo conhecimento histórico.
                         </p>
                     </div>
 
-                    <a href="cursos.html" class="button button-primary">
+                    <a href="cursos.php" class="button button-primary">
                         Explorar conteúdos →
                     </a>
 
@@ -164,10 +165,10 @@
                             <span class="stat-icon progress-icon">◴</span>
                         </div>
 
-                        <strong class="stat-value">35%</strong>
-
+                        <strong class="stat-value">--</strong>
+                        
                         <div class="stat-progress">
-                            <div style="width: 35%"></div>
+                            <div style="width: 0%"></div>
                         </div>
 
                         <span class="stat-description">
@@ -183,7 +184,7 @@
                             <span class="stat-icon modules-icon">▤</span>
                         </div>
 
-                        <strong class="stat-value">03 <small>/ 08</small></strong>
+                        <strong class="stat-value">-- <small>/ 08</small></strong>
 
                         <span class="stat-description">
                             Temas da plataforma
@@ -198,7 +199,7 @@
                             <span class="stat-icon exams-icon">✓</span>
                         </div>
 
-                        <strong class="stat-value">02</strong>
+                       <strong class="stat-value">--</strong>
 
                         <span class="stat-description">
                             Avaliações concluídas
@@ -213,7 +214,7 @@
                             <span class="stat-icon average-icon">★</span>
                         </div>
 
-                        <strong class="stat-value">8,5</strong>
+                        <strong class="stat-value">--</strong>
 
                         <span class="stat-description">
                             Média de desempenho
@@ -258,9 +259,9 @@
                                 <div style="width: 60%"></div>
                             </div>
 
-                            <a href="aula.html" class="button button-primary" data-coming-soon>
-                                Continuar estudando →
-                            </a>
+                          <a href="aula.php" class="button button-primary">
+                        Continuar estudando →
+                        </a>
 
                         </div>
 
@@ -348,7 +349,7 @@
                             <p>Uma jornada pelos principais acontecimentos históricos.</p>
                         </div>
 
-                        <a href="cursos.html" class="text-link">
+                        <a href="cursos.php" class="text-link">
                             Ver todos →
                         </a>
 
@@ -373,8 +374,8 @@
                                 <div style="width: 60%"></div>
                             </div>
 
-                            <a href="aula.html" data-coming-soon>
-                                Acessar módulo →
+                           <a href="aula.php">
+                             Acessar módulo →
                             </a>
 
                         </article>
@@ -396,7 +397,7 @@
                                 <div style="width: 0%"></div>
                             </div>
 
-                            <a href="cursos.html">
+                            <a href="cursos.php">
                                 Acessar módulo →
                             </a>
 
@@ -419,7 +420,7 @@
                                 <div style="width: 0%"></div>
                             </div>
 
-                            <a href="cursos.html">
+                            <a href="cursos.php">
                                 Acessar módulo →
                             </a>
 
@@ -442,7 +443,7 @@
                                 <div style="width: 0%"></div>
                             </div>
 
-                            <a href="cursos.html">
+                            <a href="cursos.php">
                                 Acessar módulo →
                             </a>
 

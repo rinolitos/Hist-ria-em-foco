@@ -194,7 +194,7 @@ function showEmptyResult() {
         "Iniciar avaliação →"
     );
 
-    button.href = "prova.html";
+    button.href = "prova.php";
 
     emptyCard.append(title, paragraph, button);
 

@@ -1,0 +1,97 @@
+
+/* =================================
+   PAINEL ADMINISTRATIVO
+================================= */
+
+.admin-page {
+    background-color: var(--paper);
+}
+
+/* SEÇÕES ADMINISTRATIVAS */
+
+.admin-section {
+    margin-bottom: 38px;
+}
+
+/* CARDS DE GERENCIAMENTO */
+
+.admin-card {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 23px;
+    background-color: white;
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    transition: 0.2s;
+}
+
+.admin-card:hover {
+    border-color: var(--gold);
+    box-shadow: 0 8px 20px rgba(20, 38, 61, 0.05);
+}
+
+.admin-card-icon {
+    width: 43px;
+    height: 43px;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    border-radius: 7px;
+    background-color: #F8F0DD;
+    color: #B28B37;
+    font-size: 20px;
+}
+
+.admin-card h3 {
+    color: var(--blue-dark);
+    font-family: var(--font-heading);
+    font-size: 17px;
+    margin-bottom: 5px;
+}
+
+.admin-card p {
+    color: var(--text-light);
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+.admin-status {
+    margin-left: auto;
+    padding: 6px 10px;
+    border-radius: 20px;
+    background-color: #F5F0E5;
+    color: #A17B32;
+    font-size: 9px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+/* STATUS DOS MÓDULOS */
+
+.admin-module-status {
+    color: var(--petroleum);
+    font-size: 10px;
+    font-weight: 700;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+}
+
+/* RESPONSIVIDADE */
+
+@media (max-width: 600px) {
+    .admin-card {
+        align-items: flex-start;
+        flex-wrap: wrap;
+        padding: 18px;
+    }
+
+    .admin-card > div:nth-child(2) {
+        flex: 1;
+        min-width: 180px;
+    }
+
+    .admin-status {
+        margin-left: 61px;
+    }
+}

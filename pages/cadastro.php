@@ -1,4 +1,90 @@
+<?php
 
+$mensagem = "";
+$tipoMensagem = "";
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+
+    $nome = trim($_POST["nome"] ?? "");
+    $email = trim($_POST["email"] ?? "");
+    $senha = $_POST["senha"] ?? "";
+    $confirmarSenha = $_POST["confirmar_senha"] ?? "";
+
+    if (strlen($nome) < 3) {
+
+        $mensagem = "Digite um nome com pelo menos 3 caracteres.";
+        $tipoMensagem = "erro";
+
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+
+        $mensagem = "Digite um e-mail válido.";
+        $tipoMensagem = "erro";
+
+    } elseif (strlen($senha) < 6) {
+
+        $mensagem = "A senha deve ter pelo menos 6 caracteres.";
+        $tipoMensagem = "erro";
+
+    } elseif ($senha !== $confirmarSenha) {
+
+        $mensagem = "As senhas não coincidem.";
+        $tipoMensagem = "erro";
+
+    } else {
+
+        try {
+
+            require_once __DIR__ . "/../assets/config/conexao.php";
+
+            // Verifica se o e-mail já está cadastrado
+            $consulta = $pdo->prepare(
+                "SELECT id FROM usuarios WHERE email = :email"
+            );
+
+            $consulta->execute([
+                ":email" => $email
+            ]);
+
+            if ($consulta->fetch()) {
+
+                $mensagem = "Este e-mail já está cadastrado.";
+                $tipoMensagem = "erro";
+
+            } else {
+
+                // Protege a senha
+                $senhaHash = password_hash($senha, PASSWORD_DEFAULT);
+
+                // Cadastra o usuário como aluno
+                $sql = "INSERT INTO usuarios
+                        (nome, email, senha, tipo, data_cadastro)
+                        VALUES
+                        (:nome, :email, :senha, 'aluno', NOW())";
+
+                $cadastro = $pdo->prepare($sql);
+
+                $cadastro->execute([
+                    ":nome" => $nome,
+                    ":email" => $email,
+                    ":senha" => $senhaHash
+                ]);
+
+                $mensagem = "Cadastro realizado com sucesso!";
+                $tipoMensagem = "sucesso";
+
+            }
+
+        } catch (PDOException $e) {
+
+            $mensagem = "Não foi possível realizar o cadastro. Verifique a conexão com o banco de dados.";
+            $tipoMensagem = "erro";
+
+        }
+
+    }
+}
+
+?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -9,9 +95,7 @@
     <title>Criar conta | História em Foco</title>
 
     <link rel="stylesheet" href="../assets/css/global.css">
-    <link rel="stylesheet" href="../assets/css/pages.css">
-
-    <script src="../assets/js/auth.js" defer></script>
+    <link rel="stylesheet" href="../assets/css/pages.css"> 
 </head>
 
 <body class="auth-page">
@@ -97,7 +181,7 @@
 
                 </div>
 
-                <form id="register-form" data-auth-form="register">
+                <form id="register-form" method="POST" action="cadastro.php">
 
                     <div class="form-group">
 
@@ -196,8 +280,10 @@
                         Criar minha conta →
                     </button>
 
-                    <p class="form-feedback" role="status" aria-live="polite"></p>
-
+                <p class="form-feedback" role="status" aria-live="polite"style="display: <?= $mensagem !== "" ? "block" : "none" ?>;
+                color: <?= $tipoMensagem === "erro" ? "#dc2626" : "#16a34a" ?>;">
+                <?= htmlspecialchars($mensagem, ENT_QUOTES, "UTF-8") ?>
+                </p>
                 </form>
 
                 <div class="auth-divider">
@@ -210,7 +296,7 @@
                         Já possui uma conta?
                     </p>
 
-                    <a href="login.html">
+                    <a href="login.php">
                         Fazer login
                     </a>
 

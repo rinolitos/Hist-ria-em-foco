@@ -1,4 +1,7 @@
-
+<?php
+require_once __DIR__ . "/../assets/config/protecao.php";
+exigirLogin();
+?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -33,14 +36,17 @@
 
                 <a href="../index.html">Início</a>
 
-                <a href="dashboard.html">
+                <a href="dashboard.php">
                     Área do aluno
                 </a>
 
-                <span class="course-user">
-                    <span class="course-user-avatar">E</span>
-                    Estudante
+            <span class="course-user">
+                <span class="course-user-avatar">
+                <?= strtoupper(substr($_SESSION["usuario_nome"] ?? "E", 0, 1)) ?>
                 </span>
+
+                <?= htmlspecialchars($_SESSION["usuario_nome"] ?? "Estudante", ENT_QUOTES, "UTF-8") ?>
+            </span>
 
             </nav>
 

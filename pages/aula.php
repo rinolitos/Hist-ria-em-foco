@@ -1,4 +1,14 @@
+<?php
+require_once __DIR__ . "/../assets/config/sessao.php";
 
+// Modo temporário de testes.
+// Cria uma sessão de visitante apenas para visualizar as aulas.
+if (!isset($_SESSION["usuario_id"])) {
+    $_SESSION["usuario_id"] = 0;
+    $_SESSION["usuario_nome"] = "Visitante";
+    $_SESSION["usuario_tipo"] = "aluno";
+}
+?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 
