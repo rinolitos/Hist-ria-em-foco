@@ -218,7 +218,7 @@ O História em Foco representa a aplicação prática de conhecimentos de desenv
 Além de reunir conteúdos históricos, o projeto busca proporcionar uma experiência de aprendizado organizada, interativa e acessível, utilizando tecnologias de desenvolvimento web e recursos de acompanhamento educacional.
 
 ---
-**Nome dos integrantes: Enzo Agostini; Gabriel Araujo; Murilo Lazzarini; Pedro Boriero
+**Nome dos integrantes: Enzo Agostini; Gabriel Araujo; Murilo Lazzarini; Pedro Boriero**
 
 **Projeto acadêmico — Desenvolvimento de Sistemas**
 
