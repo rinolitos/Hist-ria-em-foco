@@ -1,0 +1,245 @@
+
+/* =================================
+   PAINEL ADMINISTRATIVO
+================================= */
+
+.admin-page {
+    background-color: var(--paper);
+}
+
+/* SEÇÕES ADMINISTRATIVAS */
+
+.admin-section {
+    margin-bottom: 38px;
+}
+
+/* CARDS DE GERENCIAMENTO */
+
+.admin-card {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 23px;
+    background-color: white;
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    transition: 0.2s;
+}
+
+.admin-card:hover {
+    border-color: var(--gold);
+    box-shadow: 0 8px 20px rgba(20, 38, 61, 0.05);
+}
+
+.admin-card-icon {
+    width: 43px;
+    height: 43px;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    border-radius: 7px;
+    background-color: #F8F0DD;
+    color: #B28B37;
+    font-size: 20px;
+}
+
+.admin-card h3 {
+    color: var(--blue-dark);
+    font-family: var(--font-heading);
+    font-size: 17px;
+    margin-bottom: 5px;
+}
+
+.admin-card p {
+    color: var(--text-light);
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+.admin-status {
+    margin-left: auto;
+    padding: 6px 10px;
+    border-radius: 20px;
+    background-color: #F5F0E5;
+    color: #A17B32;
+    font-size: 9px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+/* STATUS DOS MÓDULOS */
+
+.admin-module-status {
+    color: var(--petroleum);
+    font-size: 10px;
+    font-weight: 700;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+}
+
+/* RESPONSIVIDADE */
+
+@media (max-width: 600px) {
+    .admin-card {
+        align-items: flex-start;
+        flex-wrap: wrap;
+        padding: 18px;
+    }
+
+    .admin-card > div:nth-child(2) {
+        flex: 1;
+        min-width: 180px;
+    }
+
+    .admin-status {
+        margin-left: 61px;
+    }
+}
+
+/* =================================
+   FORMULÁRIOS, TABELAS E AVISOS
+================================= */
+
+.admin-flash {
+    padding: 13px 16px;
+    margin-bottom: 24px;
+    border-radius: 7px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.admin-flash-sucesso {
+    background-color: #E8F4EC;
+    color: #1F6B3A;
+    border: 1px solid #BFDFCB;
+}
+
+.admin-flash-erro {
+    background-color: #FBEAEA;
+    color: #A12626;
+    border: 1px solid #EBC3C3;
+}
+
+.admin-form {
+    display: grid;
+    gap: 8px;
+    max-width: 760px;
+    padding: 23px;
+    background-color: white;
+    border: 1px solid var(--border);
+    border-radius: 7px;
+}
+
+.admin-form label {
+    margin-top: 8px;
+    color: var(--blue-dark);
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.admin-form input[type="text"],
+.admin-form select,
+.admin-form textarea,
+.admin-filter select {
+    width: 100%;
+    padding: 11px 12px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background-color: white;
+    color: var(--text);
+    font: inherit;
+    font-size: 13px;
+}
+
+.admin-form textarea {
+    resize: vertical;
+}
+
+.admin-form input:focus,
+.admin-form select:focus,
+.admin-form textarea:focus {
+    outline: 2px solid var(--gold);
+    outline-offset: 1px;
+}
+
+.admin-form-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 14px;
+}
+
+.admin-table-wrap {
+    overflow-x: auto;
+    background-color: white;
+    border: 1px solid var(--border);
+    border-radius: 7px;
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+}
+
+.admin-table th,
+.admin-table td {
+    padding: 12px 14px;
+    text-align: left;
+    vertical-align: top;
+    border-bottom: 1px solid var(--border);
+}
+
+.admin-table th {
+    background-color: #FAF8F2;
+    color: var(--blue-dark);
+    font-size: 11px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.admin-table tr:last-child td {
+    border-bottom: 0;
+}
+
+.admin-table small {
+    color: var(--text-light);
+}
+
+.admin-actions {
+    display: flex;
+    gap: 6px;
+    white-space: nowrap;
+}
+
+.admin-small {
+    padding: 6px 10px;
+    font-size: 11px;
+}
+
+.admin-danger {
+    color: #A12626;
+}
+
+.admin-empty {
+    padding: 22px;
+    text-align: center !important;
+    color: var(--text-light);
+}
+
+.admin-note {
+    margin-top: 12px;
+    color: var(--text-light);
+    font-size: 11px;
+}
+
+.admin-filter {
+    min-width: 220px;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+}

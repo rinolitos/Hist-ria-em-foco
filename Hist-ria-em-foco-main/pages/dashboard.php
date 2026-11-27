@@ -1,6 +1,65 @@
 <?php
 require_once __DIR__ . "/../assets/config/protecao.php";
 exigirLogin();
+require_once __DIR__ . "/../assets/config/conexao.php";
+
+$provas = 0;
+$media = null;
+$melhor = null;
+$acertosTotal = 0;
+$respostasTotal = 0;
+$recentes = [];
+
+try {
+
+    $resumo = $pdo->prepare(
+        "SELECT COUNT(*) AS provas, AVG(nota) AS media, MAX(nota) AS melhor
+         FROM tentativas WHERE usuario_id = :id"
+    );
+    $resumo->execute([":id" => (int) $_SESSION["usuario_id"]]);
+    $r = $resumo->fetch();
+    $provas = (int) $r["provas"];
+    $media  = $r["media"] !== null ? (float) $r["media"] : null;
+    $melhor = $r["melhor"] !== null ? (float) $r["melhor"] : null;
+
+    $contagem = $pdo->prepare(
+        "SELECT COUNT(*) AS respostas, COALESCE(SUM(r.correta), 0) AS acertos
+         FROM respostas_tentativa r
+         JOIN tentativas t ON t.id = r.tentativa_id
+         WHERE t.usuario_id = :id"
+    );
+    $contagem->execute([":id" => (int) $_SESSION["usuario_id"]]);
+    $c = $contagem->fetch();
+    $respostasTotal = (int) $c["respostas"];
+    $acertosTotal   = (int) $c["acertos"];
+
+    $ultimas = $pdo->prepare(
+        "SELECT t.data_realizacao, t.nota,
+                (SELECT COUNT(*) FROM respostas_tentativa r WHERE r.tentativa_id = t.id) AS total,
+                (SELECT COALESCE(SUM(r.correta), 0) FROM respostas_tentativa r WHERE r.tentativa_id = t.id) AS acertos
+         FROM tentativas t WHERE t.usuario_id = :id
+         ORDER BY t.data_realizacao DESC, t.id DESC LIMIT 3"
+    );
+    $ultimas->execute([":id" => (int) $_SESSION["usuario_id"]]);
+    $recentes = $ultimas->fetchAll();
+
+} catch (PDOException $e) {
+    error_log($e->getMessage());
+}
+
+function formatarPorcentagem($valor) {
+    return $valor === null ? "--" : number_format($valor, 1, ",", ".") . "%";
+}
+
+function quandoFoi($dataUtc) {
+    $d = new DateTime($dataUtc, new DateTimeZone("UTC"));
+    $d->setTimezone(new DateTimeZone("America/Sao_Paulo"));
+    $hoje = new DateTime("now", new DateTimeZone("America/Sao_Paulo"));
+    $dias = (int) $hoje->setTime(0, 0)->diff((clone $d)->setTime(0, 0))->format("%a");
+    if ($dias === 0) return "Hoje";
+    if ($dias === 1) return "Ontem";
+    return $d->format("d/m/Y");
+}
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -119,14 +178,16 @@ exigirLogin();
 
                 </div>
 
-              <div class="topbar-welcome">
-                <span>Bem-vindo(a),</span>
-                <strong><?= htmlspecialchars($_SESSION["usuario_nome"] ?? "Estudante", ENT_QUOTES, "UTF-8") ?></strong>
-               </div>
+                <div class="topbar-right">
+
+                    <div class="topbar-welcome">
+                        <span>Bem-vindo(a),</span>
+                        <strong><?= htmlspecialchars($_SESSION["usuario_nome"] ?? "Estudante", ENT_QUOTES, "UTF-8") ?></strong>
+                    </div>
 
                     <div class="topbar-avatar">
-                    <?= strtoupper(substr($_SESSION["usuario_nome"] ?? "E", 0, 1)) ?>
-                </div>
+                        <?= htmlspecialchars(mb_strtoupper(mb_substr($_SESSION["usuario_nome"] ?? "E", 0, 1)), ENT_QUOTES, "UTF-8") ?>
+                    </div>
 
                 </div>
 
@@ -161,18 +222,18 @@ exigirLogin();
                     <article class="stat-card">
 
                         <div class="stat-top">
-                            <span class="stat-label">Progresso geral</span>
+                            <span class="stat-label">Melhor nota</span>
                             <span class="stat-icon progress-icon">◴</span>
                         </div>
 
-                        <strong class="stat-value">--</strong>
-                        
+                        <strong class="stat-value"><?= formatarPorcentagem($melhor) ?></strong>
+
                         <div class="stat-progress">
-                            <div style="width: 0%"></div>
+                            <div style="width: <?= (int) round($melhor ?? 0) ?>%"></div>
                         </div>
 
                         <span class="stat-description">
-                            Progresso dos estudos
+                            Seu melhor resultado em provas
                         </span>
 
                     </article>
@@ -180,14 +241,14 @@ exigirLogin();
                     <article class="stat-card">
 
                         <div class="stat-top">
-                            <span class="stat-label">Módulos estudados</span>
+                            <span class="stat-label">Questões acertadas</span>
                             <span class="stat-icon modules-icon">▤</span>
                         </div>
 
-                        <strong class="stat-value">-- <small>/ 08</small></strong>
+                        <strong class="stat-value"><?= $acertosTotal ?> <small>/ <?= $respostasTotal ?></small></strong>
 
                         <span class="stat-description">
-                            Temas da plataforma
+                            Acertos em todas as provas
                         </span>
 
                     </article>
@@ -199,7 +260,7 @@ exigirLogin();
                             <span class="stat-icon exams-icon">✓</span>
                         </div>
 
-                       <strong class="stat-value">--</strong>
+                        <strong class="stat-value"><?= $provas ?></strong>
 
                         <span class="stat-description">
                             Avaliações concluídas
@@ -214,7 +275,7 @@ exigirLogin();
                             <span class="stat-icon average-icon">★</span>
                         </div>
 
-                        <strong class="stat-value">--</strong>
+                        <strong class="stat-value"><?= formatarPorcentagem($media) ?></strong>
 
                         <span class="stat-description">
                             Média de desempenho
@@ -233,8 +294,8 @@ exigirLogin();
                     <article class="continue-card">
 
                         <div class="continue-header">
-                            <span>CONTINUE DE ONDE PAROU</span>
-                            <span class="continue-status">Em andamento</span>
+                            <span>COMECE POR AQUI</span>
+                            <span class="continue-status">Sugestão</span>
                         </div>
 
                         <div class="continue-content">
@@ -250,17 +311,8 @@ exigirLogin();
                                 a política, a filosofia e a cultura ocidental.
                             </p>
 
-                            <div class="continue-progress-info">
-                                <span>Progresso da aula</span>
-                                <strong>60%</strong>
-                            </div>
-
-                            <div class="continue-progress">
-                                <div style="width: 60%"></div>
-                            </div>
-
-                          <a href="aula.php" class="button button-primary">
-                        Continuar estudando →
+                            <a href="aula.php?modulo=grecia-roma" class="button button-primary">
+                        Estudar este módulo →
                         </a>
 
                         </div>
@@ -286,50 +338,37 @@ exigirLogin();
 
                         <div class="activity-list">
 
-                            <div class="activity-item">
+                            <?php foreach ($recentes as $t): ?>
+                                <div class="activity-item">
 
-                                <div class="activity-icon activity-video">
-                                    ▶
+                                    <div class="activity-icon activity-exam">
+                                        ✓
+                                    </div>
+
+                                    <div class="activity-info">
+                                        <strong>Prova concluída</strong>
+                                        <span><?= (int) $t["acertos"] ?> de <?= (int) $t["total"] ?> acertos · <?= formatarPorcentagem((float) $t["nota"]) ?></span>
+                                    </div>
+
+                                    <span class="activity-date"><?= htmlspecialchars(quandoFoi($t["data_realizacao"]), ENT_QUOTES, "UTF-8") ?></span>
+
                                 </div>
+                            <?php endforeach; ?>
 
-                                <div class="activity-info">
-                                    <strong>Aula de Grécia Antiga</strong>
-                                    <span>Conteúdo estudado</span>
+                            <?php if (!$recentes): ?>
+                                <div class="activity-item">
+
+                                    <div class="activity-icon activity-study">
+                                        ▤
+                                    </div>
+
+                                    <div class="activity-info">
+                                        <strong>Nenhuma atividade ainda</strong>
+                                        <span>Faça sua primeira prova para ver o histórico aqui.</span>
+                                    </div>
+
                                 </div>
-
-                                <span class="activity-date">Hoje</span>
-
-                            </div>
-
-                            <div class="activity-item">
-
-                                <div class="activity-icon activity-exam">
-                                    ✓
-                                </div>
-
-                                <div class="activity-info">
-                                    <strong>Prova de Roma Antiga</strong>
-                                    <span>Avaliação concluída</span>
-                                </div>
-
-                                <span class="activity-date">Ontem</span>
-
-                            </div>
-
-                            <div class="activity-item">
-
-                                <div class="activity-icon activity-study">
-                                    ▤
-                                </div>
-
-                                <div class="activity-info">
-                                    <strong>Introdução às Cruzadas</strong>
-                                    <span>Conteúdo iniciado</span>
-                                </div>
-
-                                <span class="activity-date">Anterior</span>
-
-                            </div>
+                            <?php endif; ?>
 
                         </div>
 
@@ -366,15 +405,15 @@ exigirLogin();
                             <h3>Grécia e Roma Antiga</h3>
 
                             <div class="module-card-footer">
-                                <span>Em andamento</span>
-                                <span class="module-progress-dot ongoing"></span>
+                                <span>Disponível</span>
+                                <span class="module-progress-dot"></span>
                             </div>
 
                             <div class="module-card-progress">
-                                <div style="width: 60%"></div>
+                                <div style="width: 0%"></div>
                             </div>
 
-                           <a href="aula.php">
+                           <a href="aula.php?modulo=grecia-roma">
                              Acessar módulo →
                             </a>
 
@@ -389,7 +428,7 @@ exigirLogin();
                             <h3>As Cruzadas</h3>
 
                             <div class="module-card-footer">
-                                <span>Não iniciado</span>
+                                <span>Disponível</span>
                                 <span class="module-progress-dot"></span>
                             </div>
 
@@ -412,7 +451,7 @@ exigirLogin();
                             <h3>Renascimento</h3>
 
                             <div class="module-card-footer">
-                                <span>Não iniciado</span>
+                                <span>Disponível</span>
                                 <span class="module-progress-dot"></span>
                             </div>
 
@@ -435,7 +474,7 @@ exigirLogin();
                             <h3>Revolução Francesa</h3>
 
                             <div class="module-card-footer">
-                                <span>Não iniciado</span>
+                                <span>Disponível</span>
                                 <span class="module-progress-dot"></span>
                             </div>
 

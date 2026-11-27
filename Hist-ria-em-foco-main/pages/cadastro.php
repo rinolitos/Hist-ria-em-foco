@@ -1,9 +1,16 @@
 <?php
 
+require_once __DIR__ . "/../assets/config/sessao.php";
+
 $mensagem = "";
 $tipoMensagem = "";
 
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
+if ($_SERVER["REQUEST_METHOD"] === "POST" && !csrfValido()) {
+
+    $mensagem = "Sessão expirada. Recarregue a página e tente novamente.";
+    $tipoMensagem = "erro";
+
+} elseif ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     $nome = trim($_POST["nome"] ?? "");
     $email = trim($_POST["email"] ?? "");
@@ -57,9 +64,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
                 // Cadastra o usuário como aluno
                 $sql = "INSERT INTO usuarios
-                        (nome, email, senha, tipo, data_cadastro)
+                        (nome, email, senha, tipo)
                         VALUES
-                        (:nome, :email, :senha, 'aluno', NOW())";
+                        (:nome, :email, :senha, 'aluno')";
 
                 $cadastro = $pdo->prepare($sql);
 
@@ -95,7 +102,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <title>Criar conta | História em Foco</title>
 
     <link rel="stylesheet" href="../assets/css/global.css">
-    <link rel="stylesheet" href="../assets/css/pages.css"> 
+    <link rel="stylesheet" href="../assets/css/pages.css">
+    <script src="../assets/js/auth.js" defer></script>
 </head>
 
 <body class="auth-page">
@@ -182,6 +190,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 </div>
 
                 <form id="register-form" method="POST" action="cadastro.php">
+                    <?= csrfCampo() ?>
 
                     <div class="form-group">
 
@@ -280,7 +289,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         Criar minha conta →
                     </button>
 
-                <p class="form-feedback" role="status" aria-live="polite"style="display: <?= $mensagem !== "" ? "block" : "none" ?>;
+                <p class="form-feedback" role="status" aria-live="polite" style="display: <?= $mensagem !== "" ? "block" : "none" ?>;
                 color: <?= $tipoMensagem === "erro" ? "#dc2626" : "#16a34a" ?>;">
                 <?= htmlspecialchars($mensagem, ENT_QUOTES, "UTF-8") ?>
                 </p>

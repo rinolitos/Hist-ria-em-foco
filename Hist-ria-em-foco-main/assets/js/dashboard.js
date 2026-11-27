@@ -99,8 +99,8 @@ if (welcomeDate) {
 const comingSoonLinks = document.querySelectorAll("[data-coming-soon]");
 
 const workingPages = [
-    "prova.html",
-    "desempenho.html"
+    "prova.php",
+    "desempenho.php"
 ];
 
 workingPages.forEach(destination => {
@@ -167,10 +167,10 @@ comingSoonLinks.forEach(link => {
 
         event.preventDefault();
 
-        if (destination === "aula.html") {
+        if (destination === "aula.php") {
 
             window.location.href =
-                "aula.html?modulo=grecia-roma";
+                "aula.php?modulo=grecia-roma";
 
             return;
 

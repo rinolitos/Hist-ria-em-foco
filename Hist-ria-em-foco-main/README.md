@@ -27,36 +27,41 @@ O **História em Foco** é um projeto desenvolvido com o objetivo de apresentar 
 
 ## Tecnologias Utilizadas
 
-- HTML5 – Estruturação das páginas.
-- CSS3 – Estilização e aparência visual.
-- JavaScript – Implementação de interatividade.
-- Bootstrap – Construção de layouts responsivos.
+- HTML5 e CSS3 – estrutura e visual das páginas.
+- JavaScript – interatividade (aulas, prova, gráficos de desempenho).
+- PHP 8 + PDO – login, cadastro, sessões e API de avaliações.
+- MySQL / MariaDB – usuários e histórico de avaliações.
 
 ## Estrutura do Projeto
 
 ```text
-Historia-em-Foco/
-│
-├── index.html
-├── sobre.html
-├── cursos.html
-│
-├── css/
-│   └── style.css
-│
-├── js/
-│   └── script.js
-│
-└── img/
-    └── imagens/
+Hist-ria-em-foco/
+├── index.html            # página inicial
+├── criar_admin.php       # cria administradores (somente terminal)
+├── pages/                # login, cadastro, dashboard, cursos, aula, prova, resultado, desempenho, admin
+│   ├── api_prova.php       # sorteia a prova e corrige no servidor
+│   ├── api_tentativas.php  # histórico de provas do aluno logado
+│   └── admin.php           # painel do administrador (questões, módulos, alunos, resultados)
+├── assets/
+│   ├── config/           # conexão com o banco, sessão e proteção de páginas
+│   ├── css/
+│   └── js/
+├── sql/banco.sql         # criação do banco, módulos e questões iniciais
+└── TESTES.md             # roteiro de testes
 ```
 
 ## Como Executar o Projeto
 
-1. Clone ou faça o download deste repositório.
-2. Abra a pasta do projeto.
-3. Execute o arquivo `index.html` em um navegador.
-4. Navegue pelo site e explore os conteúdos disponíveis.
+Requisitos: PHP 8+ e MySQL/MariaDB (por exemplo, XAMPP ou WAMP).
+
+1. Copie a pasta do projeto para `htdocs` (XAMPP) ou `www` (WAMP).
+2. Inicie o Apache e o MySQL.
+3. No phpMyAdmin, importe o arquivo `sql/banco.sql`.
+4. Se o seu MySQL não usar usuário `root` sem senha, ajuste `assets/config/conexao.php`
+   ou defina as variáveis de ambiente `DB_HOST`, `DB_USER`, `DB_PASS` e `DB_NAME`.
+5. Acesse `http://localhost/<nome-da-pasta>/index.html` e crie uma conta.
+6. Cadastros feitos pelo site são sempre do tipo `aluno`. Para criar um administrador, rode no terminal,
+   na pasta do projeto: `php criar_admin.php`.
 
 ## Integrantes
 

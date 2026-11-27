@@ -1,13 +1,6 @@
 <?php
-require_once __DIR__ . "/../assets/config/sessao.php";
-
-// Modo temporário de testes.
-// Cria uma sessão de visitante apenas para visualizar as aulas.
-if (!isset($_SESSION["usuario_id"])) {
-    $_SESSION["usuario_id"] = 0;
-    $_SESSION["usuario_nome"] = "Visitante";
-    $_SESSION["usuario_tipo"] = "aluno";
-}
+require_once __DIR__ . "/../assets/config/protecao.php";
+exigirLogin();
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -39,9 +32,9 @@ if (!isset($_SESSION["usuario_id"])) {
 
             <nav class="lesson-header-navigation">
 
-                <a href="dashboard.html">Área do aluno</a>
+                <a href="dashboard.php">Área do aluno</a>
 
-                <a href="cursos.html" class="lesson-nav-highlight">
+                <a href="cursos.php" class="lesson-nav-highlight">
                     Meus conteúdos
                 </a>
 
@@ -63,9 +56,9 @@ if (!isset($_SESSION["usuario_id"])) {
             <div class="lesson-container">
 
                 <div class="lesson-breadcrumb">
-                    <a href="dashboard.html">Área do aluno</a>
+                    <a href="dashboard.php">Área do aluno</a>
                     <span>/</span>
-                    <a href="cursos.html">Conteúdos</a>
+                    <a href="cursos.php">Conteúdos</a>
                     <span>/</span>
                     <strong id="lesson-breadcrumb-title">Aula</strong>
                 </div>
@@ -257,12 +250,12 @@ if (!isset($_SESSION["usuario_id"])) {
 
                     <div class="lesson-bottom-navigation">
 
-                        <a href="cursos.html" class="button button-outline">
+                        <a href="cursos.php" class="button button-outline">
                             ← Voltar aos conteúdos
                         </a>
 
                         <a
-                            href="prova.html"
+                            href="prova.php"
                             class="button button-primary"
                             id="start-exam"
                         >

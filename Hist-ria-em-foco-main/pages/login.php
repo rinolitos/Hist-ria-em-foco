@@ -5,7 +5,20 @@ require_once __DIR__ . "/../assets/config/sessao.php";
 $mensagem = "";
 $tipoMensagem = "";
 
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
+// Limite simples de tentativas: 5 erros bloqueiam por 60 segundos
+$bloqueadoAte = (int) ($_SESSION["login_bloqueio"] ?? 0);
+
+if ($_SERVER["REQUEST_METHOD"] === "POST" && !csrfValido()) {
+
+    $mensagem = "Sessão expirada. Recarregue a página e tente novamente.";
+    $tipoMensagem = "erro";
+
+} elseif ($_SERVER["REQUEST_METHOD"] === "POST" && $bloqueadoAte > time()) {
+
+    $mensagem = "Muitas tentativas. Aguarde alguns instantes e tente novamente.";
+    $tipoMensagem = "erro";
+
+} elseif ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     $email = trim($_POST["email"] ?? "");
     $senha = $_POST["senha"] ?? "";
@@ -47,6 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 } else {
 
                     session_regenerate_id(true);
+                    unset($_SESSION["login_falhas"], $_SESSION["login_bloqueio"]);
 
                     $_SESSION["usuario_id"] = $usuario["id"];
                     $_SESSION["usuario_nome"] = $usuario["nome"];
@@ -63,6 +77,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 }
 
             } else {
+
+                $_SESSION["login_falhas"] = ($_SESSION["login_falhas"] ?? 0) + 1;
+
+                if ($_SESSION["login_falhas"] >= 5) {
+                    $_SESSION["login_bloqueio"] = time() + 60;
+                    $_SESSION["login_falhas"] = 0;
+                }
 
                 $mensagem = "E-mail ou senha incorretos.";
                 $tipoMensagem = "erro";
@@ -91,6 +112,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     <link rel="stylesheet" href="../assets/css/global.css">
     <link rel="stylesheet" href="../assets/css/pages.css">
+    <script src="../assets/js/auth.js" defer></script>
 
     
 </head>
@@ -178,6 +200,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 </div>
 
                 <form id="login-form" method="POST" action="login.php">
+                    <?= csrfCampo() ?>
 
                     <div class="form-group">
 

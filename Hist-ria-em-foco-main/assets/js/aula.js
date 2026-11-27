@@ -706,37 +706,6 @@ const moduleData = modules[currentSlug];
 
 
 // ========================================
-// CORREÇÃO DOS LINKS PHP
-// ========================================
-
-document.querySelectorAll("a[href]").forEach(link => {
-
-    const href = link.getAttribute("href");
-
-    if (!href) {
-        return;
-    }
-
-    if (href === "dashboard.html") {
-        link.href = "dashboard.php";
-    }
-
-    if (href === "cursos.html") {
-        link.href = "cursos.php";
-    }
-
-    if (href === "prova.html") {
-        link.href = "prova.php";
-    }
-
-    if (href.startsWith("aula.html?modulo=")) {
-        link.href = href.replace("aula.html", "aula.php");
-    }
-
-});
-
-
-// ========================================
 // INFORMAÇÕES PRINCIPAIS
 // ========================================
 

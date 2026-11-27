@@ -63,7 +63,7 @@ exigirLogin();
             <div class="courses-container">
 
                 <div class="courses-breadcrumb">
-                    <a href="dashboard.html">Área do aluno</a>
+                    <a href="dashboard.php">Área do aluno</a>
                     <span>/</span>
                     <strong>Conteúdos</strong>
                 </div>

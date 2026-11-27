@@ -4,7 +4,6 @@
 // PAINEL DE DESEMPENHO
 // ========================================
 
-const HISTORY_KEY = "historiaEmFoco_examHistory";
 
 const averageGrade = document.getElementById("average-grade");
 const totalExams = document.getElementById("total-exams");
@@ -87,15 +86,19 @@ function formatDate(dateValue) {
 // CARREGAR HISTÓRICO
 // ========================================
 
-function loadHistory() {
+async function loadHistory() {
 
     try {
 
-        const storedHistory = localStorage.getItem(HISTORY_KEY);
+        const response = await fetch("api_tentativas.php", {
+            credentials: "same-origin"
+        });
 
-        const parsedHistory = storedHistory
-            ? JSON.parse(storedHistory)
-            : [];
+        if (!response.ok) {
+            throw new Error("HTTP " + response.status);
+        }
+
+        const parsedHistory = await response.json();
 
         if (Array.isArray(parsedHistory)) {
 
@@ -532,6 +535,4 @@ if (currentYear) {
 // INICIALIZAR
 // ========================================
 
-loadHistory();
-
-renderPage();
+loadHistory().then(renderPage);

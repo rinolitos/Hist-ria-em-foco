@@ -5,8 +5,6 @@
 // ========================================
 
 const RESULT_KEY = "historiaEmFoco_lastResult";
-const HISTORY_KEY = "historiaEmFoco_examHistory";
-const SAVED_ATTEMPT_KEY = "historiaEmFoco_savedAttempt";
 
 const resultTitle = document.getElementById("result-title");
 const resultMessage = document.getElementById("result-message");
@@ -49,64 +47,6 @@ function createElement(tag, className, content) {
 
 
 // ========================================
-// SALVAR A AVALIAÇÃO NO HISTÓRICO
-// ========================================
-
-function saveResultToHistory(result) {
-
-    try {
-
-        const savedAttempt = sessionStorage.getItem(SAVED_ATTEMPT_KEY);
-
-        if (savedAttempt === result.date) {
-            return;
-        }
-
-        const storedHistory = localStorage.getItem(HISTORY_KEY);
-
-        let history = storedHistory
-            ? JSON.parse(storedHistory)
-            : [];
-
-        if (!Array.isArray(history)) {
-            history = [];
-        }
-
-        const alreadyExists = history.some(
-            item => item.date === result.date
-        );
-
-        if (!alreadyExists) {
-
-            history.unshift(result);
-
-            history = history.slice(0, 50);
-
-            localStorage.setItem(
-                HISTORY_KEY,
-                JSON.stringify(history)
-            );
-
-        }
-
-        sessionStorage.setItem(
-            SAVED_ATTEMPT_KEY,
-            result.date
-        );
-
-    } catch (error) {
-
-        console.error(
-            "Não foi possível salvar o histórico:",
-            error
-        );
-
-    }
-
-}
-
-
-// ========================================
 // CARREGAR RESULTADO
 // ========================================
 
@@ -137,8 +77,6 @@ function loadResult() {
         return;
 
     }
-
-    saveResultToHistory(result);
 
     renderSummary(result);
 
@@ -441,9 +379,12 @@ function renderQuestionReview(questions) {
         content.append(
             title,
             selectedLine,
-            correctLine,
-            explanationBox
+            correctLine
         );
+
+        if (question.explanation) {
+            content.append(explanationBox);
+        }
 
         article.append(header, content);
 
